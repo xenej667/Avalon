@@ -66,13 +66,14 @@
   .meta{margin-top:16px;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13px;color:var(--muted)}
   .meta b{color:var(--gold)}
 
-  /* stat band (clean, no overlap) */
-  .stats{background:var(--navy);border-top:3px solid var(--gold);border-bottom:1px solid var(--line)}
-  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-  .stat{padding:30px 18px;text-align:center;border-right:1px solid var(--line)}
-  .stat:last-child{border-right:0}
-  .stat b{display:block;font-family:var(--disp);font-style:italic;font-weight:900;font-size:42px;line-height:.9;color:var(--gold);text-shadow:3px 3px 0 rgba(0,0,0,.35)}
-  .stat span{display:block;margin-top:8px;font-family:var(--label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:var(--muted)}
+  /* slanted yellow ticker: peeks above the fold so the page invites a scroll */
+  .strip{background:var(--gold);color:var(--ink);transform:skewY(-1.6deg);margin:-44px 0 0;position:relative;z-index:2;overflow:hidden;box-shadow:0 7px 0 var(--gold-d)}
+  .strip-in{transform:skewY(1.6deg);padding:19px 0 17px}
+  .strip-track{display:flex;width:max-content;animation:tick 48s linear infinite}
+  .strip-track span{display:flex;align-items:center;white-space:nowrap;font-family:var(--disp);font-style:italic;font-weight:900;text-transform:uppercase;font-size:26px;line-height:1;letter-spacing:.02em}
+  .strip-track i{font-style:normal;color:var(--gold-d);padding:0 26px}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.strip-track{animation:none}}
 
   /* sections */
   section{padding:84px 0}
@@ -82,15 +83,37 @@
   .h-lg{font-size:clamp(40px,6vw,68px);margin:8px 0 0;text-shadow:3px 4px 0 rgba(0,0,0,.4)}
   .sub{color:var(--muted);max-width:620px;margin:16px 0 0;font-size:17px}
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-  .card{background:var(--navy);clip-path:var(--cut);padding:26px 24px 28px;border-left:4px solid var(--gold);transition:transform .1s,background .1s}
-  .card:hover{transform:translateY(-4px);background:#13224d}
-  .card.b{border-left-color:var(--blue)} .card.r{border-left-color:var(--red)}
-  .ic{width:54px;height:54px;display:grid;place-items:center;background:var(--gold);color:var(--ink);clip-path:var(--cut)}
-  .card.b .ic{background:var(--blue);color:#fff} .card.r .ic{background:var(--red);color:#fff}
-  .ic svg{width:30px;height:30px}
-  .card h3{font-size:26px;margin-top:16px}
-  .card p{color:var(--muted);margin-top:8px;font-size:15px}
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:16px;margin-top:40px;
+    grid-template-areas:"br br stw stw" "br br or lga" "cre off ev ev" "shop voice ev ev"}
+  .tile{position:relative;isolation:isolate;overflow:hidden;clip-path:var(--cut);background:var(--navy);border-left:4px solid var(--gold);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 22px 22px}
+  .tile.b{border-left-color:var(--blue)} .tile.r{border-left-color:var(--red)} .tile.p{border-left-color:#ff4fd8}
+  .tile>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .35s ease}
+  .tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,14,28,.97) 0%,rgba(10,14,28,.78) 34%,rgba(10,14,28,0) 68%)}
+  .tile:hover>img{transform:scale(1.05)}
+  .tile h3{font-size:30px;text-shadow:3px 3px 0 rgba(0,0,0,.6)}
+  .tile p{color:#d5def7;margin-top:7px;font-size:15px;line-height:1.45;max-width:460px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+  .tile.xl h3{font-size:clamp(46px,5.2vw,68px);text-shadow:4px 5px 0 rgba(0,0,0,.6)}
+  .tile.xl p{font-size:17px}
+  .tile.xl::after{background:linear-gradient(0deg,rgba(10,14,28,.97) 0%,rgba(10,14,28,.6) 30%,rgba(10,14,28,0) 58%)}
+  .badge{position:absolute;top:18px;left:18px;font-family:var(--label);font-weight:900;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px 11px 4px;background:var(--gold);color:var(--ink);transform:skewX(-8deg)}
+  .badge>span{display:block;transform:skewX(8deg)}
+  .tile.b .badge{background:var(--blue);color:#fff} .tile.r .badge{background:var(--red);color:#fff} .tile.p .badge{background:#ff4fd8;color:var(--ink)}
+  .t-br{grid-area:br} .t-stw{grid-area:stw} .t-or{grid-area:or} .t-lga{grid-area:lga}
+  .t-cre{grid-area:cre} .t-off{grid-area:off} .t-ev{grid-area:ev} .t-shop{grid-area:shop} .t-voice{grid-area:voice}
+  .t-br>img{object-position:44% 50%} .t-ev>img{object-position:50% 30%} .t-or>img{object-position:22% 50%}
+  .t-off>img{object-position:62% 50%} .t-cre>img{object-position:58% 50%} .t-stw>img{object-position:60% 40%}
+  /* voice tile: no screenshot exists, so a party-chat mock with real season faces */
+  .t-voice{background:var(--navy-2) repeating-linear-gradient(-55deg,rgba(255,61,61,.07) 0 14px,transparent 14px 28px)}
+  .t-voice::after{display:none}
+  .party{display:flex;gap:10px;margin-bottom:auto}
+  .party .av{width:52px;height:52px;padding:3px;background:var(--navy-3);clip-path:var(--cut)}
+  .party .av.on{background:var(--gold)}
+  .party .av img{width:100%;height:100%;object-fit:cover;clip-path:var(--cut)}
+  .eq{display:flex;align-items:flex-end;gap:4px;height:26px;margin:12px 0 4px}
+  .eq i{width:6px;background:var(--gold);height:30%;animation:eq 1s ease-in-out infinite alternate}
+  .eq i:nth-child(3n){animation-duration:.7s} .eq i:nth-child(3n+1){animation-duration:1.3s} .eq i:nth-child(4n){animation-delay:-.4s} .eq i:nth-child(5n){animation-delay:-.8s}
+  @keyframes eq{to{height:100%}}
+  @media(prefers-reduced-motion:reduce){.eq i{animation:none;height:60%}}
 
   /* steps */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
@@ -114,8 +137,13 @@
     nav.links{display:none} .burger{display:block}
     nav.links.open{display:flex;position:absolute;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
     nav.links.open a{padding:14px 24px;border-bottom:1px solid var(--line)}
-    .grid,.steps{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr 1fr;grid-auto-rows:230px;grid-template-areas:"br br" "br br" "stw stw" "or lga" "ev ev" "ev ev" "cre off" "shop voice"}
+    .strip-track span{font-size:21px}
     .hero h1{font-size:clamp(64px,18vw,120px)}
+  }
+  @media(max-width:560px){
+    .bento{grid-template-columns:1fr;grid-auto-rows:240px;grid-template-areas:"br" "br" "stw" "or" "lga" "ev" "ev" "cre" "off" "shop" "voice"}
   }
 </style>
 </head>
@@ -152,27 +180,29 @@
   </div>
 </section>
 
-<div class="stats"><div class="wrap">
-  <div class="stat"><b>Gratuit</b><span>Et pour toujours</span></div>
-  <div class="stat"><b>9</b><span>Modes de jeu</span></div>
-  <div class="stat"><b>C2S2</b><span>Chapitre 2 Saison 2</span></div>
-  <div class="stat"><b>Voice</b><span>Chat vocal intégré</span></div>
-</div></div>
+<div class="strip"><div class="strip-in"><div class="strip-track">
+  <span>Gratuit pour toujours<i>/</i></span><span>Battle Royale<i>/</i></span><span>Sauver le Monde<i>/</i></span><span>Créatif<i>/</i></span><span>Or Massif<i>/</i></span><span>Late Game Arena<i>/</i></span><span>Astronomical<i>/</i></span><span>Hors-ligne<i>/</i></span><span>Voice intégré<i>/</i></span>
+  <span aria-hidden="true">Gratuit pour toujours<i>/</i></span><span aria-hidden="true">Battle Royale<i>/</i></span><span aria-hidden="true">Sauver le Monde<i>/</i></span><span aria-hidden="true">Créatif<i>/</i></span><span aria-hidden="true">Or Massif<i>/</i></span><span aria-hidden="true">Late Game Arena<i>/</i></span><span aria-hidden="true">Astronomical<i>/</i></span><span aria-hidden="true">Hors-ligne<i>/</i></span><span aria-hidden="true">Voice intégré<i>/</i></span>
+</div></div></div>
 
 <section id="jeu" class="sec"><div class="wrap">
   <div class="eyebrow">Tout le jeu, débloqué</div>
   <h2 class="h-lg">Neuf façons de jouer</h2>
   <p class="sub">Avalon fait tourner le Chapitre 2 Saison 2 en entier — modes classiques, modes fun et compétitif. Tu télécharges une fois, tu joues à tout.</p>
-  <div class="grid">
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg></div><h3>Battle Royale</h3><p>Le bus, la tempête, la victoire royale. Solo, Duo, Escouade — matchmaking et serveurs dédiés.</p></div>
-    <div class="card b"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/></svg></div><h3>Sauver le Monde</h3><p>La campagne PvE : construis, défends, progresse. Héros, armes et quêtes.</p></div>
-    <div class="card r"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div><h3>Créatif</h3><p>Tes îles, tes règles. Construis et rejoue avec tes amis.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg></div><h3>Or Massif</h3><p>Tout en or : armes légendaires à gogo, action non-stop. Le mode fun par excellence.</p></div>
-    <div class="card b"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M6 4h12v4a6 6 0 0 1-12 0V4z"/><path d="M6 6H3v1a3 3 0 0 0 3 3M18 6h3v1a3 3 0 0 1-3 3"/></svg></div><h3>Late Game Arena</h3><p>Direct en fin de partie : full loot, full matos, zone qui se resserre. L'endgame en boucle.</p></div>
-    <div class="card r"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M8.8 16.8a4 4 0 0 1 6.4 0M5.5 13.3a9 9 0 0 1 3.4-2.1M18.5 13.3a9 9 0 0 0-4-2.3M12 20h.01"/></svg></div><h3>Hors-ligne</h3><p>Pas de réseau ? Joue en solo contre l'IA, avec ton compte et tes cosmétiques.</p></div>
-    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div><h3>Events live</h3><p>Les grands moments de la saison, rejoués en direct avec tout le serveur.</p></div>
-    <div class="card b"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></div><h3>Boutique &amp; casier</h3><p>Rotation quotidienne, skins, emotes, pioche — ton casier te suit partout.</p></div>
-    <div class="card r"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></div><h3>Voice intégré</h3><p>Chat vocal de groupe directement dans le launcher. Pas d'appli en plus.</p></div>
+  <div class="bento">
+    <a class="tile xl t-br" href="#dl"><img src="art/modes/br.jpg" alt="" loading="lazy"><span class="badge"><span>Solo · Duo · Escouade</span></span><h3>Battle Royale</h3><p>Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.</p></a>
+    <a class="tile b t-stw" href="#dl"><img src="art/modes/stw.jpg" alt="" loading="lazy"><span class="badge"><span>Campagne PvE</span></span><h3>Sauver le Monde</h3><p>Construis ton fort, tiens face à la horde, fais monter tes héros, tes armes et tes quêtes.</p></a>
+    <a class="tile t-or" href="#dl"><img src="art/modes/ormassif.jpg" alt="" loading="lazy"><h3>Or Massif</h3><p>Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.</p></a>
+    <a class="tile b t-lga" href="#dl"><img src="art/modes/lategame.jpg" alt="" loading="lazy"><h3>Late Game Arena</h3><p>Direct en fin de partie, full matos, zone qui se resserre.</p></a>
+    <a class="tile r t-cre" href="#dl"><img src="art/modes/creatif.jpg" alt="" loading="lazy"><h3>Créatif</h3><p>Ton île, tes règles. Construis et rejoue avec tes amis.</p></a>
+    <a class="tile r t-off" href="#dl"><img src="art/modes/horsligne.jpg" alt="" loading="lazy"><h3>Hors-ligne</h3><p>Pas de réseau ? Solo contre l'IA, avec ton compte et ton casier.</p></a>
+    <a class="tile xl p t-ev" href="#dl"><img src="art/modes/astronomical.jpg" alt="" loading="lazy"><span class="badge"><span>Event live · Travis Scott</span></span><h3>Astronomical</h3><p>Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.</p></a>
+    <a class="tile b t-shop" href="#dl"><img src="art/modes/boutique.jpg" alt="" loading="lazy"><h3>Boutique &amp; casier</h3><p>Rotation quotidienne, skins, emotes, pioches : ton casier te suit partout.</p></a>
+    <div class="tile r t-voice">
+      <div class="party"><span class="av on"><img src="art/modes/av-midas.jpg" alt=""></span><span class="av"><img src="art/modes/av-tntina.jpg" alt=""></span><span class="av"><img src="art/modes/av-skye.jpg" alt=""></span><span class="av"><img src="art/modes/av-meowscles.jpg" alt=""></span></div>
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <h3>Voice intégré</h3><p>Ton groupe en vocal direct dans le launcher. Pas d'appli en plus.</p>
+    </div>
   </div>
 </div></section>
 
