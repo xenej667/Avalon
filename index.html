@@ -68,7 +68,7 @@
 
   /* slanted yellow ticker: peeks above the fold so the page invites a scroll */
   .strip{background:var(--gold);color:var(--ink);transform:skewY(-1.6deg);margin:-44px 0 0;position:relative;z-index:2;overflow:hidden;box-shadow:0 7px 0 var(--gold-d)}
-  .strip-in{transform:skewY(1.6deg);padding:19px 0 17px}
+  .strip-in{padding:19px 0 17px} /* text follows the slant */
   .strip-track{display:flex;width:max-content;animation:tick 48s linear infinite}
   .strip-track span{display:flex;align-items:center;white-space:nowrap;font-family:var(--disp);font-style:italic;font-weight:900;text-transform:uppercase;font-size:26px;line-height:1;letter-spacing:.02em}
   .strip-track i{font-style:normal;color:var(--gold-d);padding:0 26px}
