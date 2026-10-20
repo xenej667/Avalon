@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Avalon — Fortnite Chapitre 2 Saison 2, à ta façon</title>
+<meta name="description" content="Avalon : rejoue le Chapitre 2 Saison 2. Battle Royale 100 joueurs, Sauver le Monde, Créatif, events live et voice intégré. Télécharge le launcher gratuit." />
+<meta property="og:title" content="Avalon" />
+<meta property="og:description" content="Fortnite Chapitre 2 Saison 2, à ta façon. Launcher gratuit, Windows." />
+<meta property="og:type" content="website" />
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<link rel="stylesheet" href="fonts/fonts.css" />
+<style>
+  :root{
+    --ink:#0a0e1c; --navy:#101a3c; --navy-2:#172656; --navy-3:#22377a;
+    --blue:#1e6fff; --sky:#47b6ff; --gold:#ffe500; --gold-d:#b39f00; --red:#ff3d3d;
+    --muted:#9fb0d9; --dim:#6c7cab; --line:rgba(160,185,255,.16);
+    --nav:66px;
+    --cut:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);
+    --cut2:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
+    --disp:"Burbank Big Condensed",Impact,"Arial Narrow",sans-serif;
+    --label:"Burbank Small","Barlow Condensed",sans-serif;
+    --body:"Barlow","Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:#fff;font-family:var(--body);font-weight:500;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  h1,h2,h3{font-family:var(--disp);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;letter-spacing:.006em}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;font-family:var(--label);font-weight:900;font-size:17px;letter-spacing:.05em;text-transform:uppercase;border:0;cursor:pointer;padding:17px 30px 15px;color:var(--ink);background:var(--gold);transform:skewX(-8deg);box-shadow:0 6px 0 var(--gold-d);transition:transform .08s,box-shadow .08s,background .1s}
+  .btn>*{transform:skewX(8deg)}
+  .btn:hover{background:#fff04d;transform:skewX(-8deg) translateY(-2px);box-shadow:0 8px 0 var(--gold-d)}
+  .btn:active{transform:skewX(-8deg) translateY(4px);box-shadow:0 2px 0 var(--gold-d)}
+  .btn svg{width:20px;height:20px;flex:none}
+  .btn.ghost{background:var(--navy-3);color:#fff;box-shadow:0 6px 0 #0b1b45}
+  .btn.ghost:hover{background:#2b4596;box-shadow:0 8px 0 #0b1b45}
+  .btn.sm{font-size:14px;padding:11px 18px 9px;box-shadow:0 4px 0 var(--gold-d)}
+
+  /* nav */
+  header{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:rgba(10,14,28,.86);border-bottom:1px solid var(--line)}
+  header .wrap{height:100%;display:flex;align-items:center;gap:20px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-style:italic;font-weight:900;font-size:26px;letter-spacing:.02em}
+  .logo img{width:30px;height:30px}
+  nav.links{display:flex;gap:26px;margin-left:16px;font-family:var(--label);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+  nav.links a{color:var(--muted);padding:4px 0;border-bottom:3px solid transparent}
+  nav.links a:hover{color:#fff}
+  .spacer{flex:1}
+  .burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:var(--nav);overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:#0a0e1c url(art/keyart.jpg) center/cover;z-index:0}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 8%,rgba(10,14,28,.78) 42%,rgba(10,14,28,.25) 75%),linear-gradient(0deg,var(--ink),rgba(10,14,28,0) 38%)}
+  .hero .wrap{position:relative;z-index:1;padding-top:40px;padding-bottom:60px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--label);font-weight:900;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:7px 14px 5px;transform:skewX(-8deg)}
+  .chip>span{transform:skewX(8deg)}
+  .hero h1{margin:18px 0 0;font-size:clamp(78px,15vw,188px);text-shadow:5px 6px 0 rgba(0,0,0,.55)}
+  .hero .tag{font-family:var(--disp);font-style:italic;font-weight:900;text-transform:uppercase;font-size:clamp(22px,3.4vw,38px);color:var(--sky);text-shadow:3px 3px 0 rgba(0,0,0,.5);margin-top:4px}
+  .hero p.lead{max-width:540px;margin:20px 0 0;color:#dfe7ff;font-size:19px}
+  .cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:30px}
+  .meta{margin-top:16px;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13px;color:var(--muted)}
+  .meta b{color:var(--gold)}
+
+  /* stat band (clean, no overlap) */
+  .stats{background:var(--navy);border-top:3px solid var(--gold);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:30px 18px;text-align:center;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat b{display:block;font-family:var(--disp);font-style:italic;font-weight:900;font-size:46px;line-height:.9;color:var(--gold);text-shadow:3px 3px 0 rgba(0,0,0,.35)}
+  .stat span{display:block;margin-top:8px;font-family:var(--label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;color:var(--muted)}
+
+  /* sections */
+  section{padding:84px 0}
+  .eyebrow{font-family:var(--label);font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);font-size:14px}
+  .h-lg{font-size:clamp(40px,6vw,68px);margin:8px 0 0;text-shadow:3px 4px 0 rgba(0,0,0,.4)}
+  .sub{color:var(--muted);max-width:620px;margin:16px 0 0;font-size:17px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .card{background:var(--navy);clip-path:var(--cut);padding:26px 24px 28px;border-left:4px solid var(--gold);transition:transform .1s,background .1s}
+  .card:hover{transform:translateY(-4px);background:#13224d}
+  .card.b{border-left-color:var(--blue)} .card.r{border-left-color:var(--red)}
+  .ic{width:54px;height:54px;display:grid;place-items:center;background:var(--gold);color:var(--ink);clip-path:var(--cut)}
+  .card.b .ic{background:var(--blue);color:#fff} .card.r .ic{background:var(--red);color:#fff}
+  .ic svg{width:30px;height:30px}
+  .card h3{font-size:26px;margin-top:16px}
+  .card p{color:var(--muted);margin-top:8px;font-size:15px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+  .step{background:var(--navy-2);clip-path:var(--cut);padding:26px 22px}
+  .step .n{font-family:var(--disp);font-style:italic;font-weight:900;font-size:56px;color:var(--gold);line-height:.8;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
+  .step h3{font-size:24px;margin-top:10px}
+  .step p{color:var(--muted);margin-top:8px;font-size:15px}
+
+  /* final cta */
+  .final{position:relative;background:#0b1430 url(art/keyart2.jpg) center/cover;padding:96px 0}
+  .final::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--ink),rgba(10,14,28,.72))}
+  .final .wrap{position:relative;z-index:1;text-align:center}
+  .final h2{font-size:clamp(44px,7vw,84px);text-shadow:4px 5px 0 rgba(0,0,0,.5)}
+  .final .cta{justify-content:center}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dim)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12px}
+  .disc{color:var(--dim);max-width:640px;font-family:var(--body);font-weight:500;text-transform:none;letter-spacing:0;font-size:12px;line-height:1.5}
+
+  @media(max-width:860px){
+    nav.links{display:none} .burger{display:block}
+    nav.links.open{display:flex;position:absolute;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
+    nav.links.open a{padding:14px 24px;border-bottom:1px solid var(--line)}
+    .grid,.steps{grid-template-columns:1fr}
+    .hero h1{font-size:clamp(64px,18vw,120px)}
+  }
+</style>
+</head>
+<body id="top">
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="icons/avalon.png" alt="" onerror="this.style.display='none'">AVALON</a>
+    <nav class="links" id="menu">
+      <a href="#jeu">Le jeu</a>
+      <a href="#comment">Comment jouer</a>
+      <a href="#dl">Télécharger</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="btn sm" href="https://pub-8192913467e54871b341bd04ad61be3a.r2.dev/app/Avalon-Setup.exe"><span>Télécharger</span></a>
+    <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <span class="chip"><span>Chapitre 2 · Saison 2</span></span>
+    <h1>Avalon</h1>
+    <div class="tag">Fortnite comme en 2020. Pour toujours.</div>
+    <p class="lead">Battle Royale 100 joueurs, Sauver le Monde, Créatif, events live et voice intégré — le Chapitre 2 Saison 2, rejouable quand tu veux, sur un serveur rien qu'à nous.</p>
+    <div class="cta">
+      <a class="btn" href="https://pub-8192913467e54871b341bd04ad61be3a.r2.dev/app/Avalon-Setup.exe" id="dl1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        <span>Télécharger pour Windows</span>
+      </a>
+      <a class="btn ghost" href="#jeu"><span>Découvrir le jeu</span></a>
+    </div>
+    <div class="meta">Gratuit · Windows 10/11 64-bit · launcher <b>158 Mo</b> · le jeu se télécharge tout seul</div>
+  </div>
+</section>
+
+<div class="stats"><div class="wrap">
+  <div class="stat"><b>100</b><span>Joueurs par partie</span></div>
+  <div class="stat"><b>6</b><span>Modes de jeu</span></div>
+  <div class="stat"><b>C2S2</b><span>Chapitre 2 Saison 2</span></div>
+  <div class="stat"><b>0&#8239;&euro;</b><span>100% gratuit</span></div>
+</div></div>
+
+<section id="jeu" class="wrap">
+  <div class="eyebrow">Tout le jeu, débloqué</div>
+  <h2 class="h-lg">Un launcher, tous les modes</h2>
+  <p class="sub">Avalon fait tourner le Chapitre 2 Saison 2 en entier. Tu télécharges une fois, tu joues à tout.</p>
+  <div class="grid">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg></div><h3>Battle Royale</h3><p>Le bus, la tempête, 100 joueurs. Solo, Duo, Escouade — matchmaking et serveurs dédiés.</p></div>
+    <div class="card b"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/></svg></div><h3>Sauver le Monde</h3><p>La campagne PvE : construis, défends, progresse. Héros, armes et quêtes.</p></div>
+    <div class="card r"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div><h3>Créatif</h3><p>Tes îles, tes règles. Construis et rejoue avec tes amis.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div><h3>Events live</h3><p>Les grands moments de la saison, rejoués en direct avec tout le serveur.</p></div>
+    <div class="card b"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></div><h3>Boutique &amp; casier</h3><p>Rotation quotidienne, skins, emotes, pioche — ton casier te suit partout.</p></div>
+    <div class="card r"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></div><h3>Voice intégré</h3><p>Chat vocal de groupe directement dans le launcher. Pas d'appli en plus.</p></div>
+  </div>
+</section>
+
+<section id="comment" class="wrap" style="padding-top:20px">
+  <div class="eyebrow">En trois minutes</div>
+  <h2 class="h-lg">Comment jouer</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Télécharge</h3><p>Récupère le launcher Avalon (158 Mo) et lance l'installation. Un vrai assistant, pas de ligne de commande.</p></div>
+    <div class="step"><div class="n">2</div><h3>Installe le jeu</h3><p>Ouvre Avalon, clique Installer : le jeu se télécharge tout seul depuis nos serveurs. Reprise si tu coupes.</p></div>
+    <div class="step"><div class="n">3</div><h3>Joue</h3><p>Crée ton compte, choisis ton camp, et saute du bus. Tes amis, ton casier, tes parties.</p></div>
+  </div>
+</section>
+
+<section id="dl" class="final">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Prêt ?</div>
+    <h2>Saute dans la partie</h2>
+    <p class="sub" style="margin:16px auto 0;color:#cdd8ff">Launcher gratuit pour Windows. Le jeu (~41 Go) se télécharge au premier lancement.</p>
+    <div class="cta">
+      <a class="btn" href="https://pub-8192913467e54871b341bd04ad61be3a.r2.dev/app/Avalon-Setup.exe" id="dl2">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        <span>Télécharger Avalon</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Avalon · Chapitre 2 Saison 2</span>
+    <span class="disc">Projet de fans non officiel, sans but lucratif. Non affilié à Epic Games. Fortnite est une marque d'Epic Games, Inc.</span>
+  </div>
+</footer>
+
+<script>
+  var b=document.getElementById('burger'),m=document.getElementById('menu');
+  b.addEventListener('click',function(){m.classList.toggle('open')});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
+</script>
+</body>
+</html>
