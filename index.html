@@ -86,7 +86,7 @@
   .sub{color:var(--muted);max-width:620px;margin:16px 0 0;font-size:17px}
 
   .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:16px;margin-top:40px;
-    grid-template-areas:"br br stw stw" "br br or lga" "cre off ev ev" "shop voice ev ev"}
+    grid-template-areas:"br br stw stw" "br br or lga" "cre cre ev ev" "off voice ev ev"}
   .tile{position:relative;isolation:isolate;overflow:hidden;clip-path:var(--cut);background:var(--navy);border-left:4px solid var(--gold);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 22px 22px}
   .tile.b{border-left-color:var(--blue)} .tile.r{border-left-color:var(--red)} .tile.p{border-left-color:#ff4fd8}
   .tile>img,.tile>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .35s ease}
@@ -101,9 +101,9 @@
   .badge>span{display:block;transform:skewX(8deg)}
   .tile.b .badge{background:var(--blue);color:#fff} .tile.r .badge{background:var(--red);color:#fff} .tile.p .badge{background:#ff4fd8;color:var(--ink)}
   .t-br{grid-area:br} .t-stw{grid-area:stw} .t-or{grid-area:or} .t-lga{grid-area:lga}
-  .t-cre{grid-area:cre} .t-off{grid-area:off} .t-ev{grid-area:ev} .t-shop{grid-area:shop} .t-voice{grid-area:voice}
+  .t-cre{grid-area:cre} .t-off{grid-area:off} .t-ev{grid-area:ev} .t-voice{grid-area:voice}
   .t-br>img{object-position:55% 50%} .t-ev>video{object-position:50% 50%} .t-or>img{object-position:22% 50%}
-  .t-off>img{object-position:62% 50%} .t-cre>img{object-position:50% 40%} .t-stw>img{object-position:60% 40%}
+  .t-off>img{object-position:62% 50%} .t-cre>img{object-position:50% 30%} .t-stw>img{object-position:60% 40%}
   .t-lga>img{object-position:50% 50%}
   /* voice tile: no screenshot exists, so a party-chat mock with real season faces */
   .t-voice{background:var(--navy-2) repeating-linear-gradient(-55deg,rgba(255,61,61,.07) 0 14px,transparent 14px 28px)}
@@ -141,12 +141,13 @@
     nav.links.open{display:flex;position:absolute;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
     nav.links.open a{padding:14px 24px;border-bottom:1px solid var(--line)}
     .steps{grid-template-columns:1fr}
-    .bento{grid-template-columns:1fr 1fr;grid-auto-rows:230px;grid-template-areas:"br br" "br br" "stw stw" "or lga" "ev ev" "ev ev" "cre off" "shop voice"}
+    .bento{grid-template-columns:1fr 1fr;grid-auto-rows:230px;grid-template-areas:"br br" "br br" "stw stw" "or lga" "ev ev" "ev ev" "cre cre" "off voice"}
     .strip-track span{font-size:21px}
     .hero h1{font-size:clamp(64px,18vw,120px)}
   }
   @media(max-width:560px){
-    .bento{grid-template-columns:1fr;grid-auto-rows:240px;grid-template-areas:"br" "br" "stw" "or" "lga" "ev" "ev" "cre" "off" "shop" "voice"}
+    .bento{grid-template-columns:1fr;grid-auto-rows:240px;grid-template-areas:"br" "br" "stw" "or" "lga" "ev" "ev" "cre" "off" "voice"}
+    .t-cre>img{object-position:8% 30%}
   }
 </style>
 </head>
@@ -190,7 +191,7 @@
 
 <section id="jeu" class="sec"><div class="wrap">
   <div class="eyebrow">Tout le jeu, débloqué</div>
-  <h2 class="h-lg">Neuf façons de jouer</h2>
+  <h2 class="h-lg">Huit façons de jouer</h2>
   <p class="sub">Avalon fait tourner le Chapitre 2 Saison 2 en entier — modes classiques, modes fun et compétitif. Tu télécharges une fois, tu joues à tout.</p>
   <div class="bento">
     <a class="tile xl t-br" href="#dl"><img src="art/modes/br.jpg" alt="" loading="lazy"><span class="badge"><span>Solo · Duo · Escouade</span></span><h3>Battle Royale</h3><p>Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.</p></a>
@@ -200,7 +201,6 @@
     <a class="tile r t-cre" href="#dl"><img src="art/modes/creatif.jpg" alt="" loading="lazy"><h3>Créatif</h3><p>Ton île, tes règles. Construis et rejoue avec tes amis.</p></a>
     <a class="tile r t-off" href="#dl"><img src="art/modes/horsligne.jpg" alt="" loading="lazy"><h3>Hors-ligne</h3><p>Pas de réseau ? Solo contre l'IA, avec ton compte et ton casier.</p></a>
     <a class="tile xl p t-ev" href="#dl"><video id="astro" src="art/modes/astronomical.mp4" poster="art/modes/astronomical-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="badge"><span>Event live · Travis Scott</span></span><h3>Astronomical</h3><p>Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.</p></a>
-    <a class="tile b t-shop" href="#dl"><img src="art/modes/boutique.jpg" alt="" loading="lazy"><h3>Boutique &amp; casier</h3><p>Rotation quotidienne, skins, emotes, pioches : ton casier te suit partout.</p></a>
     <div class="tile r t-voice">
       <div class="party"><span class="av on"><img src="art/modes/av-midas.jpg" alt=""></span><span class="av"><img src="art/modes/av-tntina.jpg" alt=""></span><span class="av"><img src="art/modes/av-skye.jpg" alt=""></span><span class="av"><img src="art/modes/av-meowscles.jpg" alt=""></span></div>
       <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
