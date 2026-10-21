@@ -89,9 +89,9 @@
     grid-template-areas:"br br stw stw" "br br or lga" "cre off ev ev" "shop voice ev ev"}
   .tile{position:relative;isolation:isolate;overflow:hidden;clip-path:var(--cut);background:var(--navy);border-left:4px solid var(--gold);display:flex;flex-direction:column;justify-content:flex-end;padding:20px 22px 22px}
   .tile.b{border-left-color:var(--blue)} .tile.r{border-left-color:var(--red)} .tile.p{border-left-color:#ff4fd8}
-  .tile>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .35s ease}
+  .tile>img,.tile>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .35s ease}
   .tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,14,28,.97) 0%,rgba(10,14,28,.78) 34%,rgba(10,14,28,0) 68%)}
-  .tile:hover>img{transform:scale(1.05)}
+  .tile:hover>img,.tile:hover>video{transform:scale(1.05)}
   .tile h3{font-size:30px;text-shadow:3px 3px 0 rgba(0,0,0,.6)}
   .tile p{color:#d5def7;margin-top:7px;font-size:15px;line-height:1.45;max-width:460px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
   .tile.xl h3{font-size:clamp(46px,5.2vw,68px);text-shadow:4px 5px 0 rgba(0,0,0,.6)}
@@ -102,8 +102,9 @@
   .tile.b .badge{background:var(--blue);color:#fff} .tile.r .badge{background:var(--red);color:#fff} .tile.p .badge{background:#ff4fd8;color:var(--ink)}
   .t-br{grid-area:br} .t-stw{grid-area:stw} .t-or{grid-area:or} .t-lga{grid-area:lga}
   .t-cre{grid-area:cre} .t-off{grid-area:off} .t-ev{grid-area:ev} .t-shop{grid-area:shop} .t-voice{grid-area:voice}
-  .t-br>img{object-position:44% 50%} .t-ev>img{object-position:50% 30%} .t-or>img{object-position:22% 50%}
-  .t-off>img{object-position:62% 50%} .t-cre>img{object-position:58% 50%} .t-stw>img{object-position:60% 40%}
+  .t-br>img{object-position:55% 50%} .t-ev>video{object-position:50% 50%} .t-or>img{object-position:22% 50%}
+  .t-off>img{object-position:62% 50%} .t-cre>img{object-position:50% 40%} .t-stw>img{object-position:60% 40%}
+  .t-lga>img{object-position:50% 50%}
   /* voice tile: no screenshot exists, so a party-chat mock with real season faces */
   .t-voice{background:var(--navy-2) repeating-linear-gradient(-55deg,rgba(255,61,61,.07) 0 14px,transparent 14px 28px)}
   .t-voice::after{display:none}
@@ -198,7 +199,7 @@
     <a class="tile b t-lga" href="#dl"><img src="art/modes/lategame.jpg" alt="" loading="lazy"><h3>Late Game Arena</h3><p>Direct en fin de partie, full matos, zone qui se resserre.</p></a>
     <a class="tile r t-cre" href="#dl"><img src="art/modes/creatif.jpg" alt="" loading="lazy"><h3>Créatif</h3><p>Ton île, tes règles. Construis et rejoue avec tes amis.</p></a>
     <a class="tile r t-off" href="#dl"><img src="art/modes/horsligne.jpg" alt="" loading="lazy"><h3>Hors-ligne</h3><p>Pas de réseau ? Solo contre l'IA, avec ton compte et ton casier.</p></a>
-    <a class="tile xl p t-ev" href="#dl"><img src="art/modes/astronomical.jpg" alt="" loading="lazy"><span class="badge"><span>Event live · Travis Scott</span></span><h3>Astronomical</h3><p>Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.</p></a>
+    <a class="tile xl p t-ev" href="#dl"><video id="astro" src="art/modes/astronomical.mp4" poster="art/modes/astronomical-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="badge"><span>Event live · Travis Scott</span></span><h3>Astronomical</h3><p>Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.</p></a>
     <a class="tile b t-shop" href="#dl"><img src="art/modes/boutique.jpg" alt="" loading="lazy"><h3>Boutique &amp; casier</h3><p>Rotation quotidienne, skins, emotes, pioches : ton casier te suit partout.</p></a>
     <div class="tile r t-voice">
       <div class="party"><span class="av on"><img src="art/modes/av-midas.jpg" alt=""></span><span class="av"><img src="art/modes/av-tntina.jpg" alt=""></span><span class="av"><img src="art/modes/av-skye.jpg" alt=""></span><span class="av"><img src="art/modes/av-meowscles.jpg" alt=""></span></div>
@@ -243,6 +244,13 @@
   var b=document.getElementById('burger'),m=document.getElementById('menu');
   b.addEventListener('click',function(){m.classList.toggle('open')});
   m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
+  // Astronomical clip: silent loop, only plays (and downloads) while on screen; poster only with reduced motion
+  var v=document.getElementById('astro');
+  if(v&&'IntersectionObserver'in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){v.preload='auto';var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause();
+    })},{threshold:.25}).observe(v);
+  }
 </script>
 </body>
 </html>
