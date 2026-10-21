@@ -53,6 +53,8 @@
   nav.links a{color:var(--muted);padding:4px 0;border-bottom:3px solid transparent}
   nav.links a:hover{color:#fff}
   .spacer{flex:1}
+  .lang{font-family:var(--label);font-weight:900;font-size:13px;letter-spacing:.1em;color:#fff;background:transparent;border:2px solid var(--line);padding:7px 10px 5px;cursor:pointer;transform:skewX(-8deg)}
+  .lang:hover{border-color:var(--gold);color:var(--gold)}
   .burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
 
   /* hero */
@@ -149,6 +151,9 @@
     .hero h1{font-size:clamp(64px,18vw,120px)}
   }
   @media(max-width:560px){
+    header .wrap{gap:10px}
+    .logo{font-size:22px} .logo img{width:26px;height:26px}
+    .btn.sm{font-size:12px;padding:9px 12px 7px}
     .bento{grid-template-columns:1fr;grid-auto-rows:240px;grid-template-areas:"br" "br" "stw" "or" "lga" "ev" "ev" "cre" "off" "voice"}
     .t-cre>img{object-position:8% 30%}
   }
@@ -164,6 +169,7 @@
       <a href="#dl">Télécharger</a>
     </nav>
     <span class="spacer"></span>
+    <button class="lang" id="lang" type="button" aria-label="English / Français">EN</button>
     <a class="btn sm" href="https://pub-8192913467e54871b341bd04ad61be3a.r2.dev/app/Avalon-Setup.exe"><span>Télécharger</span></a>
     <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
   </div>
@@ -246,6 +252,23 @@
   var b=document.getElementById('burger'),m=document.getElementById('menu');
   b.addEventListener('click',function(){m.classList.toggle('open')});
   m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
+  // FR <-> EN: swap whole text nodes from the table; choice kept per viewer
+  (function(){
+    var EN={"Avalon - Fortnite Chapitre 2 Saison 2, à ta façon": "Avalon - Fortnite Chapter 2 Season 2, your way", "Le jeu": "The game", "Comment jouer": "How to play", "Télécharger": "Download", "Chapitre 2, Saison 2": "Chapter 2, Season 2", "Battle Royale, Sauver le Monde, Créatif, Or Massif, Late Game Arena, events live, hors-ligne et voice intégré : le Chapitre 2 Saison 2, rejouable quand tu veux, sur un serveur rien qu'à nous.": "Battle Royale, Save the World, Creative, Solid Gold, Late Game Arena, live events, offline mode and built-in voice: Chapter 2 Season 2, playable whenever you want, on a server of our own.", "Télécharger pour Windows": "Download for Windows", "Découvrir le jeu": "Explore the game", "169 Mo": "169 MB", "Gratuit pour toujours": "Free forever", "Sauver le Monde": "Save the World", "Créatif": "Creative", "Or Massif": "Solid Gold", "Hors-ligne": "Offline", "Voice intégré": "Built-in voice", "Huit façons de jouer": "Eight ways to play", "Battle Royale, Sauver le Monde, modes fun et compétitif : tout le Chapitre 2 Saison 2 tourne sur Avalon. Le launcher installe le jeu et le garde à jour pour toi.": "Battle Royale, Save the World, fun and competitive modes: all of Chapter 2 Season 2 runs on Avalon. The launcher installs the game and keeps it up to date for you.", "Solo, Duo, Escouade": "Solo, Duos, Squads", "Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.": "The bus, the storm, the Victory Royale on the Chapter 2 Season 2 island. Matchmaking and dedicated servers.", "Campagne PvE": "PvE campaign", "Construis ton fort, tiens face à la horde, fais monter tes héros, tes armes et tes quêtes.": "Build your fort, hold off the horde, level up your heroes, weapons and quests.", "Solo, Duo, Trio, Escouade": "Solo, Duos, Trios, Squads", "Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.": "Midas touched everything: every weapon drops gold, every chest is a jackpot.", "Solo, Duo, Trio": "Solo, Duos, Trios", "Direct en fin de partie, full matos, zone qui se resserre.": "Straight into the endgame: full loadout, closing zone.", "Ton île, tes règles. Construis et rejoue avec tes amis.": "Your island, your rules. Build and play with your friends.", "Pas de réseau ? Joue en solo, avec ton compte et ton casier.": "No connection? Play solo, with your account and your locker.", "Event live, Travis Scott": "Live event, Travis Scott", "Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.": "Travis Scott, giant, above the island. The concert replayed live, with the whole server in one place.", "Ton groupe en vocal direct dans le launcher.": "Your party on voice chat, right in the launcher.", "En trois minutes": "In three minutes", "Télécharge": "Download", "Récupère l'installateur Avalon (169 Mo) et suis l'assistant : choisis ton dossier, c'est prêt en une minute.": "Grab the Avalon installer (169 MB) and follow the wizard: pick your folder and you're set in a minute.", "Installe le jeu": "Install the game", "Au premier lancement, Avalon télécharge le jeu (environ 41 Go). Si ta connexion coupe, il reprend là où il s'était arrêté.": "On first launch, Avalon downloads the game (about 41 GB). If your connection drops, it picks up where it left off.", "Joue": "Play", "Connecte-toi avec Discord ou crée ton compte, invite tes potes et saute du bus.": "Sign in with Discord or create an account, invite your friends and jump off the bus.", "Prêt ?": "Ready?", "Saute dans la partie": "Jump in", "Pour Windows 10/11. Le launcher installe le jeu (environ 41 Go) puis le garde à jour.": "For Windows 10/11. The launcher installs the game (about 41 GB) and keeps it up to date.", "Télécharger Avalon": "Download Avalon", "Un serveur Discord arrive bientôt. En attendant, contacte": "A Discord server is coming soon. Until then, reach", "sur Discord.": "on Discord.", "Avalon, Chapitre 2 Saison 2": "Avalon, Chapter 2 Season 2", "Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.": "Avalon is an independent project, not maintained by Epic Games."}, nodes=[], w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+    for(var n;(n=w.nextNode());){var k=n.nodeValue.trim();if(k&&EN[k])nodes.push([n,n.nodeValue,n.nodeValue.replace(k,EN[k])])}
+    var frTitle=document.title, btn=document.getElementById('lang');
+    function set(l){
+      for(var i=0;i<nodes.length;i++)nodes[i][0].nodeValue=nodes[i][l==='en'?2:1];
+      document.title=l==='en'?(EN[frTitle]||frTitle):frTitle;
+      document.documentElement.lang=l; btn.textContent=l==='en'?'FR':'EN';
+      try{localStorage.setItem('lang',l)}catch(e){}
+    }
+    var q=(location.search.match(/[?&]lang=(en|fr)/)||[])[1], saved=null;
+    try{saved=localStorage.getItem('lang')}catch(e){}
+    var l=q||saved||((navigator.language||'fr').toLowerCase().indexOf('fr')===0?'fr':'en');
+    if(l==='en')set('en');
+    btn.addEventListener('click',function(){set(document.documentElement.lang==='en'?'fr':'en')});
+  })();
   // Astronomical clip: silent loop, only plays (and downloads) while on screen; poster only with reduced motion
   var v=document.getElementById('astro');
   if(v&&'IntersectionObserver'in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
