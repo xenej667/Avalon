@@ -27,7 +27,8 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--ink);color:#fff;font-family:var(--body);font-weight:500;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--ink);color:#fff;font-family:var(--body);font-weight:500;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-user-select:none;user-select:none}
+  .lead,.meta,.sub,.step p,footer span,.community{-webkit-user-select:text;user-select:text}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   h1,h2,h3{font-family:var(--disp);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;letter-spacing:.006em}
@@ -131,6 +132,8 @@
   .final .wrap{position:relative;z-index:1;text-align:center}
   .final h2{font-size:clamp(44px,7vw,84px);text-shadow:4px 5px 0 rgba(0,0,0,.5)}
   .final .cta{justify-content:center}
+  .community{margin-top:26px;color:#cdd8ff;font-size:15px}
+  .community b{color:var(--gold);font-weight:700}
 
   footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dim)}
   footer .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12px}
@@ -194,15 +197,15 @@
   <div class="bento">
     <a class="tile xl t-br" href="#dl"><img src="art/modes/br.jpg" alt="" loading="lazy"><span class="badge"><span>Solo, Duo, Escouade</span></span><h3>Battle Royale</h3><p>Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.</p></a>
     <a class="tile b t-stw" href="#dl"><img src="art/modes/stw.jpg" alt="" loading="lazy"><span class="badge"><span>Campagne PvE</span></span><h3>Sauver le Monde</h3><p>Construis ton fort, tiens face à la horde, fais monter tes héros, tes armes et tes quêtes.</p></a>
-    <a class="tile t-or" href="#dl"><img src="art/modes/ormassif.jpg" alt="" loading="lazy"><h3>Or Massif</h3><p>Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.</p></a>
-    <a class="tile b t-lga" href="#dl"><img src="art/modes/lategame.jpg" alt="" loading="lazy"><h3>Late Game Arena</h3><p>Direct en fin de partie, full matos, zone qui se resserre.</p></a>
+    <a class="tile t-or" href="#dl"><img src="art/modes/ormassif.jpg" alt="" loading="lazy"><span class="badge"><span>Solo, Duo, Trio, Escouade</span></span><h3>Or Massif</h3><p>Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.</p></a>
+    <a class="tile b t-lga" href="#dl"><img src="art/modes/lategame.jpg" alt="" loading="lazy"><span class="badge"><span>Solo, Duo, Trio</span></span><h3>Late Game Arena</h3><p>Direct en fin de partie, full matos, zone qui se resserre.</p></a>
     <a class="tile r t-cre" href="#dl"><img src="art/modes/creatif.jpg" alt="" loading="lazy"><h3>Créatif</h3><p>Ton île, tes règles. Construis et rejoue avec tes amis.</p></a>
-    <a class="tile r t-off" href="#dl"><img src="art/modes/horsligne.jpg" alt="" loading="lazy"><h3>Hors-ligne</h3><p>Pas de réseau ? Solo contre l'IA, avec ton compte et ton casier.</p></a>
+    <a class="tile r t-off" href="#dl"><img src="art/modes/horsligne.jpg" alt="" loading="lazy"><h3>Hors-ligne</h3><p>Pas de réseau ? Joue en solo, avec ton compte et ton casier.</p></a>
     <a class="tile xl p t-ev" href="#dl"><video id="astro" src="art/modes/astronomical.mp4" poster="art/modes/astronomical-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="badge"><span>Event live, Travis Scott</span></span><h3>Astronomical</h3><p>Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.</p></a>
     <div class="tile r t-voice">
       <div class="party"><span class="av on"><img src="art/modes/av-midas.jpg" alt=""></span><span class="av"><img src="art/modes/av-tntina.jpg" alt=""></span><span class="av"><img src="art/modes/av-skye.jpg" alt=""></span><span class="av"><img src="art/modes/av-meowscles.jpg" alt=""></span></div>
       <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <h3>Voice intégré</h3><p>Ton groupe en vocal direct dans le launcher. Pas d'appli en plus.</p>
+      <h3>Voice intégré</h3><p>Ton groupe en vocal direct dans le launcher.</p>
     </div>
   </div>
 </div></section>
@@ -228,6 +231,7 @@
         <span>Télécharger Avalon</span>
       </a>
     </div>
+    <p class="community">Un serveur Discord arrive bientôt. En attendant, contacte <b>chenkor</b> sur Discord.</p>
   </div>
 </section>
 
