@@ -28,7 +28,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--ink);color:#fff;font-family:var(--body);font-weight:500;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-user-select:none;user-select:none}
-  .lead,.meta,.sub,.step p,footer span,.community{-webkit-user-select:text;user-select:text}
+  .lead,.meta,.sub,.step p,.faq p,.tcard p,footer span,.disc,.community{-webkit-user-select:text;user-select:text}
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   h1,h2,h3{font-family:var(--disp);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;letter-spacing:.006em}
@@ -52,6 +52,7 @@
   nav.links{display:flex;gap:26px;margin-left:16px;font-family:var(--label);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
   nav.links a{color:var(--muted);padding:4px 0;border-bottom:3px solid transparent}
   nav.links a:hover{color:#fff}
+  nav.links a.on{color:#fff;border-bottom-color:var(--gold)}
   .spacer{flex:1}
   .lang{font-family:var(--label);font-weight:900;font-size:13px;letter-spacing:.1em;color:#fff;background:transparent;border:2px solid var(--line);padding:7px 10px 5px;cursor:pointer;transform:skewX(-8deg)}
   .lang:hover{border-color:var(--gold);color:var(--gold)}
@@ -121,15 +122,39 @@
   @keyframes eq{to{height:100%}}
   @media(prefers-reduced-motion:reduce){.eq i{animation:none;height:60%}}
 
-  /* steps */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-  .step{background:var(--navy-2);clip-path:var(--cut);padding:26px 22px}
-  .step .n{font-family:var(--disp);font-style:italic;font-weight:900;font-size:56px;color:var(--gold);line-height:.8;text-shadow:3px 3px 0 rgba(0,0,0,.4)}
-  .step h3{font-size:24px;margin-top:10px}
-  .step p{color:var(--muted);margin-top:8px;font-size:15px}
+  /* steps: numbered slabs joined by a dashed yellow rail */
+  .steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .steps::before{content:"";position:absolute;left:8%;right:8%;top:30px;height:4px;background:repeating-linear-gradient(90deg,var(--gold) 0 18px,transparent 18px 32px);opacity:.6}
+  .step{position:relative;background:var(--navy-2);clip-path:var(--cut);padding:0 24px 28px;border-top:4px solid var(--gold);transition:transform .1s}
+  .step:hover{transform:translateY(-4px)}
+  .step .n{display:inline-grid;place-items:center;width:64px;height:64px;background:var(--gold);color:var(--ink);font-family:var(--disp);font-style:italic;font-weight:900;font-size:46px;line-height:1;transform:skewX(-8deg);box-shadow:0 5px 0 var(--gold-d)}
+  .step h3{font-size:28px;margin-top:20px}
+  .step p{color:#c7d3f5;margin-top:8px;font-size:15.5px}
+
+  /* trust */
+  .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+  .tcard{position:relative;background:var(--navy);clip-path:var(--cut);padding:24px 22px 26px;border-top:4px solid var(--blue)}
+  .tcard .ti{width:52px;height:52px;display:grid;place-items:center;background:var(--blue);color:#fff;clip-path:var(--cut)}
+  .tcard .ti svg{width:28px;height:28px}
+  .tcard h3{font-size:24px;margin-top:16px}
+  .tcard p{color:#c7d3f5;margin-top:8px;font-size:15px}
+  .tcard .soon{position:absolute;top:22px;right:22px;font-family:var(--label);font-weight:900;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:5px 9px 3px;transform:skewX(-8deg)}
+
+  /* faq */
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px;align-items:start}
+  .faq details{background:var(--navy);clip-path:var(--cut);border-left:4px solid var(--blue);transition:background .1s}
+  .faq details:hover{background:#13224d}
+  .faq details[open]{border-left-color:var(--gold)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 22px;font-family:var(--label);font-weight:900;font-size:16px;letter-spacing:.04em;text-transform:uppercase}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";flex:none;font-family:var(--disp);font-size:32px;color:var(--gold);line-height:.8;transition:transform .15s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq p{padding:0 22px 22px;color:#c7d3f5;font-size:15.5px}
+  .faq b{color:var(--gold)}
 
   /* final cta */
-  .final{position:relative;background:#0b1430 url(art/island.jpg) center/cover;padding:96px 0}
+  .final{position:relative;background:#0b1430 url(art/island.jpg) center/cover;padding:150px 0 100px;clip-path:polygon(0 70px,100% 0,100% 100%,0 100%);margin-top:-20px}
+  .final-logo{width:92px;height:92px;margin:0 auto 14px;filter:drop-shadow(4px 5px 0 rgba(0,0,0,.45))}
   .final::before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--ink),rgba(10,14,28,.72))}
   .final .wrap{position:relative;z-index:1;text-align:center}
   .final h2{font-size:clamp(44px,7vw,84px);text-shadow:4px 5px 0 rgba(0,0,0,.5)}
@@ -137,15 +162,21 @@
   .community{margin-top:26px;color:#cdd8ff;font-size:15px}
   .community b{color:var(--gold);font-weight:700}
 
-  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dim)}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12px}
-  .disc{color:var(--dim);max-width:640px;font-family:var(--body);font-weight:500;text-transform:none;letter-spacing:0;font-size:12px;line-height:1.5}
+  footer{border-top:1px solid var(--line);padding:44px 0 36px;color:var(--dim)}
+  .foot{display:grid;grid-template-columns:1.2fr 1fr 1.4fr;gap:28px;align-items:start}
+  .fbrand{display:flex;flex-direction:column;gap:10px;font-family:var(--label);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12px}
+  .flinks{display:flex;flex-direction:column;gap:9px;font-family:var(--label);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+  .flinks a{color:var(--muted)} .flinks a:hover{color:var(--gold)}
+  .disc{color:var(--dim);font-family:var(--body);font-weight:500;font-size:13px;line-height:1.55}
 
+  @media(max-width:1100px){.trust{grid-template-columns:1fr 1fr}}
   @media(max-width:860px){
     nav.links{display:none} .burger{display:block}
     nav.links.open{display:flex;position:absolute;top:var(--nav);left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
     nav.links.open a{padding:14px 24px;border-bottom:1px solid var(--line)}
-    .steps{grid-template-columns:1fr}
+    .steps,.faq,.foot,.trust{grid-template-columns:1fr}
+    .steps::before{display:none}
+    .final{clip-path:polygon(0 40px,100% 0,100% 100%,0 100%);padding-top:110px}
     .bento{grid-template-columns:1fr 1fr;grid-auto-rows:230px;grid-template-areas:"br br" "br br" "stw stw" "or lga" "ev ev" "ev ev" "cre cre" "off voice"}
     .strip-track span{font-size:21px}
     .hero h1{font-size:clamp(64px,18vw,120px)}
@@ -166,6 +197,8 @@
     <nav class="links" id="menu">
       <a href="#jeu">Le jeu</a>
       <a href="#comment">Comment jouer</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#faq">FAQ</a>
       <a href="#dl">Télécharger</a>
     </nav>
     <span class="spacer"></span>
@@ -226,8 +259,34 @@
   </div>
 </div></section>
 
+<section id="securite" class="sec sec-tight"><div class="wrap">
+  <div class="eyebrow">Sécurité et confiance</div>
+  <h2 class="h-lg">Joue l'esprit tranquille</h2>
+  <p class="sub">Pas de surprise : voici ce que fait Avalon sur ton PC, et ce qu'il ne fait pas.</p>
+  <div class="trust">
+    <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><h3>Téléchargement vérifié</h3><p>Chaque morceau du jeu est contrôlé par son empreinte SHA-256 avant d'être installé. Un fichier abîmé ou modifié est retéléchargé.</p></div>
+    <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="16" r="1.4" fill="currentColor" stroke="none"/></svg></div><h3>Ton compte, pas celui d'Epic</h3><p>Avalon ne te demande jamais tes identifiants Epic Games. Tu crées un compte Avalon ou tu te connectes avec Discord.</p></div>
+    <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg></div><span class="soon">Bientôt</span><h3>Anti-triche Avalon Guardian</h3><p>Il ne tourne que pendant que tu joues et ne lit ni ton navigateur, ni tes documents, ni ce que tu tapes. Aucun ban sans vérification par un modérateur.</p></div>
+    <div class="tcard"><div class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5l8-1.2v7.7H3zM13 3.5L21 2v9.5h-8zM3 12.5h8v7.7L3 19zM13 12.5h8V22l-8-1.5z"/></svg></div><h3>Avertissement de Windows ?</h3><p>L'installateur n'est pas encore signé, Windows peut afficher « Windows a protégé votre ordinateur ». Clique sur Informations complémentaires, puis Exécuter quand même.</p></div>
+  </div>
+</div></section>
+
+<section id="faq" class="sec sec-tight"><div class="wrap">
+  <div class="eyebrow">Avant de sauter</div>
+  <h2 class="h-lg">Questions fréquentes</h2>
+  <div class="faq">
+    <details><summary>Faut-il un compte Epic Games ?</summary><p>Non. Tu crées ton compte Avalon dans le launcher, ou tu te connectes avec Discord.</p></details>
+    <details><summary>Quelle config faut-il ?</summary><p>Windows 10/11 64 bits et environ 95 Go libres. Un PC qui faisait tourner Fortnite en 2020 suffit.</p></details>
+    <details><summary>Je peux jouer avec mes amis ?</summary><p>Oui : groupes, invitations et chat vocal directement dans le launcher.</p></details>
+    <details><summary>Comment se font les mises à jour ?</summary><p>Le launcher télécharge les mises à jour tout seul, seulement les fichiers qui changent.</p></details>
+    <details><summary>Avalon est-il lié à Epic Games ?</summary><p>Non. Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.</p></details>
+    <details><summary>Comment vous contacter ?</summary><p>Un serveur Discord arrive bientôt. En attendant, écris à chenkor sur Discord.</p></details>
+  </div>
+</div></section>
+
 <section id="dl" class="final">
   <div class="wrap">
+    <img class="final-logo" src="icons/avalon.png" alt="" onerror="this.style.display='none'">
     <div class="eyebrow" style="color:var(--gold)">Prêt ?</div>
     <h2>Saute dans la partie</h2>
     <p class="sub" style="margin:16px auto 0;color:#cdd8ff">Pour Windows 10/11. Le launcher installe le jeu (environ 41 Go) puis le garde à jour.</p>
@@ -242,8 +301,9 @@
 </section>
 
 <footer>
-  <div class="wrap">
-    <span>Avalon, Chapitre 2 Saison 2</span>
+  <div class="wrap foot">
+    <div class="fbrand"><a class="logo" href="#top"><img src="icons/avalon.png" alt="" onerror="this.style.display='none'">AVALON</a><span>Avalon, Chapitre 2 Saison 2</span></div>
+    <nav class="flinks"><a href="#jeu">Le jeu</a><a href="#comment">Comment jouer</a><a href="#securite">Sécurité</a><a href="#faq">FAQ</a><a href="https://pub-8192913467e54871b341bd04ad61be3a.r2.dev/app/Avalon-Setup.exe">Télécharger</a></nav>
     <span class="disc">Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.</span>
   </div>
 </footer>
@@ -254,7 +314,7 @@
   m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
   // FR <-> EN: swap whole text nodes from the table; choice kept per viewer
   (function(){
-    var EN={"Avalon - Fortnite Chapitre 2 Saison 2, à ta façon": "Avalon - Fortnite Chapter 2 Season 2, your way", "Le jeu": "The game", "Comment jouer": "How to play", "Télécharger": "Download", "Chapitre 2, Saison 2": "Chapter 2, Season 2", "Battle Royale, Sauver le Monde, Créatif, Or Massif, Late Game Arena, events live, hors-ligne et voice intégré : le Chapitre 2 Saison 2, rejouable quand tu veux, sur un serveur rien qu'à nous.": "Battle Royale, Save the World, Creative, Solid Gold, Late Game Arena, live events, offline mode and built-in voice: Chapter 2 Season 2, playable whenever you want, on a server of our own.", "Télécharger pour Windows": "Download for Windows", "Découvrir le jeu": "Explore the game", "169 Mo": "169 MB", "Gratuit pour toujours": "Free forever", "Sauver le Monde": "Save the World", "Créatif": "Creative", "Or Massif": "Solid Gold", "Hors-ligne": "Offline", "Voice intégré": "Built-in voice", "Huit façons de jouer": "Eight ways to play", "Battle Royale, Sauver le Monde, modes fun et compétitif : tout le Chapitre 2 Saison 2 tourne sur Avalon. Le launcher installe le jeu et le garde à jour pour toi.": "Battle Royale, Save the World, fun and competitive modes: all of Chapter 2 Season 2 runs on Avalon. The launcher installs the game and keeps it up to date for you.", "Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.": "The bus, the storm, the Victory Royale on the Chapter 2 Season 2 island. Matchmaking and dedicated servers.", "Campagne PvE": "PvE campaign", "Construis ton fort, tiens face à la horde, fais monter tes héros, tes armes et tes quêtes.": "Build your fort, hold off the horde, level up your heroes, weapons and quests.", "Solo, Duo, Trio, Escouade": "Solo, Duos, Trios, Squads", "Solo, Trio": "Solo, Trios", "Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.": "Midas touched everything: every weapon drops gold, every chest is a jackpot.", "Solo, Duo, Trio": "Solo, Duos, Trios", "Direct en fin de partie, full matos, zone qui se resserre.": "Straight into the endgame: full loadout, closing zone.", "Ton île, tes règles. Construis et rejoue avec tes amis.": "Your island, your rules. Build and play with your friends.", "Pas de réseau ? Joue en solo, avec ton compte et ton casier.": "No connection? Play solo, with your account and your locker.", "Event live, Travis Scott": "Live event, Travis Scott", "Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.": "Travis Scott, giant, above the island. The concert replayed live, with the whole server in one place.", "Ton groupe en vocal direct dans le launcher.": "Your party on voice chat, right in the launcher.", "En trois minutes": "In three minutes", "Télécharge": "Download", "Récupère l'installateur Avalon (169 Mo) et suis l'assistant : choisis ton dossier, c'est prêt en une minute.": "Grab the Avalon installer (169 MB) and follow the wizard: pick your folder and you're set in a minute.", "Installe le jeu": "Install the game", "Au premier lancement, Avalon télécharge le jeu (environ 41 Go). Si ta connexion coupe, il reprend là où il s'était arrêté.": "On first launch, Avalon downloads the game (about 41 GB). If your connection drops, it picks up where it left off.", "Joue": "Play", "Connecte-toi avec Discord ou crée ton compte, invite tes potes et saute du bus.": "Sign in with Discord or create an account, invite your friends and jump off the bus.", "Prêt ?": "Ready?", "Saute dans la partie": "Jump in", "Pour Windows 10/11. Le launcher installe le jeu (environ 41 Go) puis le garde à jour.": "For Windows 10/11. The launcher installs the game (about 41 GB) and keeps it up to date.", "Télécharger Avalon": "Download Avalon", "Un serveur Discord arrive bientôt. En attendant, contacte": "A Discord server is coming soon. Until then, reach", "sur Discord.": "on Discord.", "Avalon, Chapitre 2 Saison 2": "Avalon, Chapter 2 Season 2", "Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.": "Avalon is an independent project, not maintained by Epic Games."}, nodes=[], w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+    var EN={"Téléchargement vérifié": "Verified download", "Chaque morceau du jeu est contrôlé par son empreinte SHA-256 avant d'être installé. Un fichier abîmé ou modifié est retéléchargé.": "Every piece of the game is checked against its SHA-256 fingerprint before it is installed. A damaged or modified file is downloaded again.", "Ton compte, pas celui d'Epic": "Your account, not Epic's", "Avalon ne te demande jamais tes identifiants Epic Games. Tu crées un compte Avalon ou tu te connectes avec Discord.": "Avalon never asks for your Epic Games login. Create an Avalon account or sign in with Discord.", "Anti-triche Avalon Guardian": "Avalon Guardian anti-cheat", "Il ne tourne que pendant que tu joues et ne lit ni ton navigateur, ni tes documents, ni ce que tu tapes. Aucun ban sans vérification par un modérateur.": "It only runs while you play and never reads your browser, your documents or what you type. No ban without a moderator's review.", "Avertissement de Windows ?": "A Windows warning?", "L'installateur n'est pas encore signé, Windows peut afficher « Windows a protégé votre ordinateur ». Clique sur Informations complémentaires, puis Exécuter quand même.": "The installer is not signed yet, so Windows may show \"Windows protected your PC\". Click More info, then Run anyway.", "Bientôt": "Soon", "Sécurité": "Security", "Sécurité et confiance": "Security and trust", "Joue l'esprit tranquille": "Play with peace of mind", "Pas de surprise : voici ce que fait Avalon sur ton PC, et ce qu'il ne fait pas.": "No surprises: here is what Avalon does on your PC, and what it doesn't.", "Faut-il un compte Epic Games ?": "Do I need an Epic Games account?", "Non. Tu crées ton compte Avalon dans le launcher, ou tu te connectes avec Discord.": "No. Create your Avalon account in the launcher, or sign in with Discord.", "Quelle config faut-il ?": "What PC do I need?", "Windows 10/11 64 bits et environ 95 Go libres. Un PC qui faisait tourner Fortnite en 2020 suffit.": "Windows 10/11 64-bit and about 95 GB of free space. A PC that ran Fortnite in 2020 is enough.", "Je peux jouer avec mes amis ?": "Can I play with my friends?", "Oui : groupes, invitations et chat vocal directement dans le launcher.": "Yes: parties, invites and voice chat right in the launcher.", "Comment se font les mises à jour ?": "How do updates work?", "Le launcher télécharge les mises à jour tout seul, seulement les fichiers qui changent.": "The launcher downloads updates by itself, only the files that changed.", "Avalon est-il lié à Epic Games ?": "Is Avalon affiliated with Epic Games?", "Non. Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.": "No. Avalon is an independent project, not maintained by Epic Games.", "Comment vous contacter ?": "How do I reach you?", "Un serveur Discord arrive bientôt. En attendant, écris à chenkor sur Discord.": "A Discord server is coming soon. Until then, message chenkor on Discord.", "Avant de sauter": "Before you drop", "Questions fréquentes": "FAQ", "Avalon - Fortnite Chapitre 2 Saison 2, à ta façon": "Avalon - Fortnite Chapter 2 Season 2, your way", "Le jeu": "The game", "Comment jouer": "How to play", "Télécharger": "Download", "Chapitre 2, Saison 2": "Chapter 2, Season 2", "Battle Royale, Sauver le Monde, Créatif, Or Massif, Late Game Arena, events live, hors-ligne et voice intégré : le Chapitre 2 Saison 2, rejouable quand tu veux, sur un serveur rien qu'à nous.": "Battle Royale, Save the World, Creative, Solid Gold, Late Game Arena, live events, offline mode and built-in voice: Chapter 2 Season 2, playable whenever you want, on a server of our own.", "Télécharger pour Windows": "Download for Windows", "Découvrir le jeu": "Explore the game", "169 Mo": "169 MB", "Gratuit pour toujours": "Free forever", "Sauver le Monde": "Save the World", "Créatif": "Creative", "Or Massif": "Solid Gold", "Hors-ligne": "Offline", "Voice intégré": "Built-in voice", "Huit façons de jouer": "Eight ways to play", "Battle Royale, Sauver le Monde, modes fun et compétitif : tout le Chapitre 2 Saison 2 tourne sur Avalon. Le launcher installe le jeu et le garde à jour pour toi.": "Battle Royale, Save the World, fun and competitive modes: all of Chapter 2 Season 2 runs on Avalon. The launcher installs the game and keeps it up to date for you.", "Le bus, la tempête, la victoire royale sur l'île du Chapitre 2 Saison 2. Matchmaking et serveurs dédiés.": "The bus, the storm, the Victory Royale on the Chapter 2 Season 2 island. Matchmaking and dedicated servers.", "Campagne PvE": "PvE campaign", "Construis ton fort, tiens face à la horde, fais monter tes héros, tes armes et tes quêtes.": "Build your fort, hold off the horde, level up your heroes, weapons and quests.", "Solo, Duo, Trio, Escouade": "Solo, Duos, Trios, Squads", "Solo, Trio": "Solo, Trios", "Midas a tout touché : chaque arme sort en or, chaque coffre est un jackpot.": "Midas touched everything: every weapon drops gold, every chest is a jackpot.", "Solo, Duo, Trio": "Solo, Duos, Trios", "Direct en fin de partie, full matos, zone qui se resserre.": "Straight into the endgame: full loadout, closing zone.", "Ton île, tes règles. Construis et rejoue avec tes amis.": "Your island, your rules. Build and play with your friends.", "Pas de réseau ? Joue en solo, avec ton compte et ton casier.": "No connection? Play solo, with your account and your locker.", "Event live, Travis Scott": "Live event, Travis Scott", "Travis Scott, géant, au-dessus de l'île. Le concert rejoué en direct, avec tout le serveur au même endroit.": "Travis Scott, giant, above the island. The concert replayed live, with the whole server in one place.", "Ton groupe en vocal direct dans le launcher.": "Your party on voice chat, right in the launcher.", "En trois minutes": "In three minutes", "Télécharge": "Download", "Récupère l'installateur Avalon (169 Mo) et suis l'assistant : choisis ton dossier, c'est prêt en une minute.": "Grab the Avalon installer (169 MB) and follow the wizard: pick your folder and you're set in a minute.", "Installe le jeu": "Install the game", "Au premier lancement, Avalon télécharge le jeu (environ 41 Go). Si ta connexion coupe, il reprend là où il s'était arrêté.": "On first launch, Avalon downloads the game (about 41 GB). If your connection drops, it picks up where it left off.", "Joue": "Play", "Connecte-toi avec Discord ou crée ton compte, invite tes potes et saute du bus.": "Sign in with Discord or create an account, invite your friends and jump off the bus.", "Prêt ?": "Ready?", "Saute dans la partie": "Jump in", "Pour Windows 10/11. Le launcher installe le jeu (environ 41 Go) puis le garde à jour.": "For Windows 10/11. The launcher installs the game (about 41 GB) and keeps it up to date.", "Télécharger Avalon": "Download Avalon", "Un serveur Discord arrive bientôt. En attendant, contacte": "A Discord server is coming soon. Until then, reach", "sur Discord.": "on Discord.", "Avalon, Chapitre 2 Saison 2": "Avalon, Chapter 2 Season 2", "Avalon est un projet indépendant, qui n'est pas entretenu par Epic Games.": "Avalon is an independent project, not maintained by Epic Games."}, nodes=[], w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
     for(var n;(n=w.nextNode());){var k=n.nodeValue.trim();if(k&&EN[k])nodes.push([n,n.nodeValue,n.nodeValue.replace(k,EN[k])])}
     var frTitle=document.title, btn=document.getElementById('lang');
     function set(l){
@@ -269,6 +329,15 @@
     if(l==='en')set('en');
     btn.addEventListener('click',function(){set(document.documentElement.lang==='en'?'fr':'en')});
   })();
+  // highlight the nav link of the section on screen
+  if('IntersectionObserver'in window){
+    var links={};[].forEach.call(document.querySelectorAll('nav.links a'),function(a){links[a.getAttribute('href').slice(1)]=a});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      var a=links[e.target.id]; if(!a)return;
+      if(e.isIntersecting){for(var k in links)links[k].classList.remove('on');a.classList.add('on')}
+    })},{rootMargin:'-45% 0px -50% 0px'});
+    ['jeu','comment','securite','faq','dl'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+  }
   // Astronomical clip: silent loop, only plays (and downloads) while on screen; poster only with reduced motion
   var v=document.getElementById('astro');
   if(v&&'IntersectionObserver'in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
